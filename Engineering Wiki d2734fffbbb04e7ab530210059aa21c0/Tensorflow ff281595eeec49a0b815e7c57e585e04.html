@@ -1,0 +1,736 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tensorflow</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ff281595-eeec-49a0-b815-e7c57e585e04" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/TensorflowLogo.png"/></div><h1 class="page-title">Tensorflow</h1></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="52bfe296-4b43-4bbd-8102-313cdfb48817"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">This is the notes taken from the youtube video </div></figure><figure id="e7dda763-e7f8-4765-8dd4-248e22a892c2"><a href="https://colab.research.google.com/drive/1zWe5-fMarO7TK35Vo_5N5QhkGlgXpvPe#scrollTo=kO-45HNch1Il" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Google Colaboratory</div></div><div class="bookmark-href"><img src="https://colab.research.google.com/favicon.ico" class="icon bookmark-icon"/>https://colab.research.google.com/drive/1zWe5-fMarO7TK35Vo_5N5QhkGlgXpvPe#scrollTo=kO-45HNch1Il</div></div><img src="https://colab.research.google.com/img/colab_favicon_256px.png" class="bookmark-image"/></a></figure><figure id="537556cf-37b0-45f3-87ab-96a64a767e25"><div class="source"><a href="https://www.youtube.com/watch?v=tpCFfeUEGs8&amp;t=117s">https://www.youtube.com/watch?v=tpCFfeUEGs8&amp;t=117s</a></div></figure><h1 id="327dd9f5-b865-4925-a99a-8f401112bdec" class="">AIcourse</h1><h3 id="6b05ebf0-6ab2-403d-b3fc-47cb29e7d7c9" class="">Date: <time>@June 19, 2022</time> </h3><h3 id="0305d253-2ce3-4d10-9b38-51a6b17cea5c" class="">Topic: </h3><div id="bec0d1bf-48ae-46d3-8c70-c6f01be392b4" class="column-list"><div id="8825174c-c480-4046-b44c-9eb526d5f50e" style="width:25%" class="column"><h3 id="36a1337e-10da-44b8-9a3e-5b9911dfc44e" class="">Recall</h3><ul id="aabd0b72-81a5-4d07-a44c-271230dd21a3" class="bulleted-list"><li style="list-style-type:disc">What are neural networks?</li></ul><p id="b71a5e15-e88a-4456-b73e-481715b8f48c" class="">
+</p><p id="d5964401-287b-4030-8578-4ec71fa3d994" class="">
+</p><p id="0c9eefea-414b-4ce7-83cc-e8d8232d4797" class="">
+</p><p id="9fe3ab17-3b5d-427d-96fd-524a9a9372b8" class="">
+</p><p id="9b0f8d41-1c39-427c-80cf-b0bb2aea62c9" class="">
+</p><p id="1c02874d-9151-4a16-8e8a-96a0bb4695f7" class="">
+</p><p id="1ec88711-94be-45c5-8476-e4b3f8505473" class="">
+</p><p id="26a6b684-0c51-456a-9162-a25c337cf491" class="">
+</p><ul id="bac40058-f5f0-499b-86cb-d2a61b047708" class="bulleted-list"><li style="list-style-type:disc">What are types of learning</li></ul><p id="1a5c521f-31f1-4a23-ac42-76679efd59ce" class="">
+</p><p id="4ed2364e-79a9-4b75-b0bc-739aad81821b" class="">
+</p><p id="95dfff28-29ff-4b57-b755-ffaa073b9a53" class="">
+</p><p id="c708d673-cb43-4b15-8bbd-2cae5f94aadd" class="">
+</p><p id="1dcaae26-ce4e-43b6-93ff-2980ebc0e850" class="">
+</p><p id="f94b47f4-8dc6-4e94-9b98-00a2576c4296" class="">
+</p><p id="e14e1bd0-90a0-45fc-a53e-08023e785798" class="">
+</p><p id="514d35a8-c24b-4ab4-b637-843882c41090" class="">
+</p><ul id="3769280e-c266-431f-ba96-e04d6a099047" class="bulleted-list"><li style="list-style-type:disc">What is ML for?</li></ul><p id="0eb9c375-d2dc-454b-926f-bae6818abf35" class="">
+</p><p id="58e9db9d-413d-418b-acb6-bf05bbc14196" class="">
+</p><p id="9e1a02e9-3bc8-412d-80c6-afa8edb108db" class="">
+</p><p id="5dc8bafb-ab80-4158-bdff-b90e56c6b5a6" class="">
+</p><p id="1127e3aa-ff3a-4e6a-82d4-c765c9c6fe01" class="">
+</p><p id="856d051e-7c83-4748-b33b-a5e582e22ccc" class="">
+</p><p id="3a3e1e64-b0d4-4ecb-802b-2a1e6688f321" class="">
+</p><ul id="87ef2a9f-43d7-4356-8318-23e072a5ba04" class="bulleted-list"><li style="list-style-type:disc">What we use to build deep learning architecture?</li></ul><p id="89535653-a0f5-4e28-a8bc-4ba98db19b65" class="">
+</p><p id="b511bd9c-9099-44fd-97e1-aab49ee683bc" class="">
+</p><p id="2f47d07f-5248-4bbc-a872-b21d7deffea9" class="">
+</p><p id="138f12ce-5f88-479d-bd2d-63ebd2d4f524" class="">
+</p><p id="15f0f05c-5f2a-43b6-b881-85ce48c0bd96" class="">
+</p><p id="4291e927-2e58-4c72-84f3-d19b2b1958a6" class="">
+</p><p id="a8a1212a-f411-4227-8238-1e1c465fb59e" class="">
+</p><ul id="e0fc3637-274f-4d76-aa41-be18c6109b47" class="bulleted-list"><li style="list-style-type:disc">What is a tensor?</li></ul><p id="a03e691b-1d1f-47e3-8637-a8699fd1b13e" class="">
+</p><p id="dab09d45-9ba8-48b7-9b4a-5204386d2716" class="">
+</p><p id="dd5fe625-1e20-41af-bdbc-3d39c220becd" class="">
+</p><p id="54dce0e4-4a15-4920-94dd-a8bee60c85fb" class="">
+</p><p id="9c50f8b3-fcce-42a2-977d-c8750189c04c" class="">
+</p><p id="110135aa-92f1-4c32-9bc1-e7cbf66835ba" class="">
+</p><p id="bc352f67-259c-4cbd-a137-9b887ba0f72e" class="">
+</p><p id="4674d2e2-bd93-4a7b-b5ac-b737d9220cf3" class="">
+</p><p id="c65793e1-bff2-4424-8ce8-fb52431acb64" class="">
+</p><p id="e7515df7-f349-4665-bd8e-af9ad4a5c53a" class="">
+</p><p id="ac14530f-d4e4-41d7-8553-fa020336f270" class="">
+</p><p id="b737bdda-0c17-410b-9bc5-00a585341aab" class="">
+</p><p id="285b4ee5-8851-4209-a079-156f6e638b63" class="">
+</p><p id="c3a3c1a4-88f3-4a06-b017-0ad401d16303" class="">
+</p><ul id="71342ffe-d4f1-4f87-84f5-e605dd73a352" class="bulleted-list"><li style="list-style-type:disc">What to do?</li></ul></div><div id="bf3a82e3-935b-4feb-becf-2a7c02e451a1" style="width:75%" class="column"><h3 id="d4dd096c-ca5a-4101-bff7-e513addca613" class="">Notes</h3><figure id="3657eaad-f94f-45be-bbeb-8f2c028ac602" class="image"><a href="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled.png"><img style="width:336px" src="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled.png"/></a></figure><p id="de066c52-fba8-41d1-85c5-3be9d79981f4" class="">
+</p><figure id="72720f3b-fed4-4e48-8694-49c23eceb03a" class="image"><a href="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%201.png"><img style="width:3840px" src="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%201.png"/></a></figure><p id="4dfdebe6-4395-4bd0-9b36-a9d80a6d77d2" class="">
+</p><figure id="2e3545d7-e7e8-4321-a42f-78b673607642" class="image"><a href="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%202.png"><img style="width:3702px" src="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%202.png"/></a></figure><p id="e89f0b17-4b81-43b1-b6b5-db5c68224277" class="">
+</p><figure id="dcc11456-5af1-4cb9-b429-19979e7b48ce" class="image"><a href="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%203.png"><img style="width:3840px" src="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%203.png"/></a></figure><p id="4969cc06-ba9c-4744-8412-00b6ad666467" class="">
+</p><figure id="5b84f0b0-5cf8-404e-8cd4-d9318bc9db6b"><div class="source"><a href="https://www.youtube.com/watch?v=f5liqUk0ZTw">https://www.youtube.com/watch?v=f5liqUk0ZTw</a></div></figure><ul id="e3bb9c2d-feaf-4877-bcbc-ce976128c962" class="bulleted-list"><li style="list-style-type:disc">It’s basically a mathematical way to represent all the forces in the universe, and a tensor is a vector space. </li></ul><ul id="ec335d02-a338-42a2-a32c-b4e1d1a9ce28" class="bulleted-list"><li style="list-style-type:disc">No matter of what dimension you represent, the indices of a vector and the rank of a tensor are equal to it, which is also the number of how many basis vector you need to use to represent, so this concept can be applied to  all dimensions. </li></ul><ul id="447516ee-8698-4435-8626-d34d0d2844f7" class="bulleted-list"><li style="list-style-type:disc">And a vector can be represented by its components </li></ul><figure id="e88d2c70-eead-441b-b126-6368eedb223c" class="image"><a href="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%204.png"><img style="width:3840px" src="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%204.png"/></a></figure></div></div><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="a3a45108-674d-4a34-a08b-6c6c793cefb5"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>SUMMARY:Intro of the course;Learned about what tensor is.</strong></div></figure><p id="efbc0668-63a0-489e-b065-ffa1b9d1158a" class="">
+</p><hr id="c513ef61-4c79-422b-a6b3-4f9384639273"/><p id="80afd266-5cdd-4da2-aba8-6372462d96de" class="">
+</p><h3 id="ed1eb170-6f62-4272-a208-a4f2a8550a33" class="">Date: <time>@June 19, 2022</time> </h3><h3 id="a8afabca-19e0-4212-a6c7-d2ceb6be7e43" class="">Topic: How to approach this course?——CODE!!!!</h3><h3 id="1d367709-6b39-43bb-8732-63204eb852dd" class="">Notes</h3><figure id="d06c63cf-8684-45ca-b871-754c74e6d26b"><div class="source"><a href="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/00_tensorflow_fundamentals.ipynb_-_Colaboratory.pdf">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/46603888-eefc-4d2b-b30b-9876bd178605/00_tensorflow_fundamentals.ipynb_-_Colaboratory.pdf</a></div></figure><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="24e00e58-cbd8-47a5-9992-c52fc14e8045"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>SUMMARY: The Colab page of this course</strong></div></figure><p id="86dfe617-2c63-4adb-b4d0-a3c68acb70f4" class="">
+</p><hr id="ff1bf736-5036-4014-9737-8809be4c071e"/><h3 id="75062720-b203-4fb5-8ad2-b846bc444720" class="">Date: <time>@June 21, 2022</time> </h3><h3 id="6791119f-be68-447f-b211-af58ca8964c3" class="">Topic: Another coding day</h3><div id="1d3b392a-481c-474f-be57-748a84b946ac" class="column-list"><div id="21d07f0a-c6a9-46a2-88ae-2b540d549c16" style="width:37.5%" class="column"><h3 id="25a5487c-3c30-4ddf-b96c-4a8098225c22" class="">Recall</h3><ul id="a64f719b-ec63-424c-8b30-f08c87e7942f" class="bulleted-list"><li style="list-style-type:disc">Error when creating random tensors, need </li></ul><pre id="cce46057-d340-4d69-b6ae-38996bdece86" class="code"><code>with tf.device(&#x27;/cpu:0&#x27;)</code></pre><p id="e6638718-4121-4617-8794-0bac5e2d1b56" class="">if you are on a apple silicon chip</p><p id="69282c0b-3026-4f15-b82c-acd985e59c06" class="">
+</p><p id="cd09485e-faa7-4fcb-becd-57d3486ea342" class="">
+</p><p id="a787e040-dd02-4d67-915d-3834f28e3fb1" class="">
+</p><p id="36312bc8-f1e1-4277-821b-d003255db3d3" class="">
+</p><p id="c9d74dd5-29ce-45c0-9e24-699ad098bf8c" class="">
+</p><p id="4a4c0e9f-d3db-47be-8668-f02f72e685a7" class="">
+</p><ul id="b2ed3e7b-975f-442d-8756-699b31eaacda" class="bulleted-list"><li style="list-style-type:disc">Understanding the tf.random.set_seed</li></ul><p id="d511390f-d34f-4190-93fa-a03c883b3e8b" class="">
+</p><p id="ee686b1e-d1fb-4ff5-8c0b-db2ea248b687" class="">
+</p><ul id="c5badbe7-a210-45dd-8d6f-4eddeda38129" class="bulleted-list"><li style="list-style-type:disc">Four rules of <code>set_seed</code><ul id="08450ef3-859e-438c-b7a9-e76ad1630de3" class="bulleted-list"><li style="list-style-type:circle">Global❌  Operation❌ ⇒ random pick a seed 变</li></ul><ul id="0fba9bf5-e122-4a47-b87b-12e43fa711c5" class="bulleted-list"><li style="list-style-type:circle">Global✅  Operation❌ ⇒ pick a <mark class="highlight-yellow"><strong>deterministic</strong></mark> operation seed and conjunct them (might differ in different version of TensorFlow) 不变</li></ul><ul id="cf0229c9-b0d5-4121-829f-b9b2f72898e4" class="bulleted-list"><li style="list-style-type:circle">Global❌  Operation✅ ⇒ random pick a  <strong><mark class="highlight-yellow">default</mark></strong> global seed 变</li></ul><ul id="5b9eeb3b-5502-4d65-aa78-d97231783670" class="bulleted-list"><li style="list-style-type:circle">Global✅  Operation✅ ⇒<p id="5a666cca-73aa-419b-b308-b4fc10f541db" class="">both are used to determine the random sequence 不变</p></li></ul></li></ul><p id="6ad0b54f-2363-40c4-8d2f-af501e76edf9" class="">
+</p></div><div id="3829a405-77f3-4471-a697-fb680bb67e86" style="width:62.5%" class="column"><h3 id="16f64714-be17-4dcf-9b62-167707df7bf1" class="">Notes</h3><ul id="0ed621f5-5cfa-4382-b58b-dde7210cbc70" class="bulleted-list"><li style="list-style-type:disc"></li></ul><figure id="63d25bda-1b1c-4bdd-9254-093c87946448" class="image"><a href="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%205.png"><img style="width:1506px" src="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%205.png"/></a></figure><p id="2ba6ad22-b0ec-4118-8157-b70487637082" class="">
+</p><p id="f89cf0c6-ac00-41b7-a4ff-ea1a889394a3" class="">
+</p><p id="f3ed5509-863b-4806-9d02-b2c885dcf39b" class="">
+</p><p id="345c23ce-63ae-4800-8ac2-32a90329c3b2" class="">
+</p><p id="400f6e24-c7a5-446c-889a-0959258dbc01" class="">
+</p><figure id="04facbbe-c36d-44a5-a999-0df2bd12f63f"><a href="https://tensorflow.google.cn/api_docs/python/tf/random/set_seed" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">tf.random.set_seed | TensorFlow Core v2.9.1</div><div class="bookmark-description">Sets the global random seed.</div></div><div class="bookmark-href"><img src="https://www.gstatic.cn/devrel-devsite/prod/v2325d8c952b9b608081f2b039989eacb0148117feedf74c3efc58771dfb973db/tensorflow/images/favicon.png" class="icon bookmark-icon"/>https://tensorflow.google.cn/api_docs/python/tf/random/set_seed</div></div></a></figure><p id="acd59824-2ad9-4fde-9aa5-de1768951e8b" class="">
+</p><figure id="384ee4b1-38ee-429d-a097-b4023225c216" class="image"><a href="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%206.png"><img style="width:1842px" src="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%206.png"/></a></figure><figure id="62ad4a51-9069-46ea-9da5-d9b0f448bdda" class="image"><a href="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%207.png"><img style="width:926px" src="Tensorflow%20ff281595eeec49a0b815e7c57e585e04/Untitled%207.png"/></a></figure><p id="4b12541d-8b83-4a44-b002-2de5fde0144e" class="">
+</p></div></div><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="8af409b3-ca46-4441-ae44-f4eca52d6cd7"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>SUMMARY:</strong></div></figure><hr id="595d3a37-55e0-4503-b9d2-e14f4e8136bc"/></div></article></body></html>
