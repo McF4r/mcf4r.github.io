@@ -1,0 +1,809 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Algorithms</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1703aec4-e043-4bde-b2e7-ca5c4489a3aa" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/1944A192-29B6-489C-AF9C-30F050E30F0A.png"/></div><h1 class="page-title">Algorithms</h1></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="de38b4a1-c31d-4a9f-ac2f-7302f4f76f10"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The learning of Algorithms</div></figure><nav id="c07ae7bb-033a-4baa-8325-d09132ad8834" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1e805746-dcfb-4b45-ac97-137da6f4f3ca"></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8e5af7e8-9038-47b9-bf37-5207b2212269">Date: <time>@August 23, 2022</time> </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a9cd57fc-a509-4c0b-a553-b00ca14d7e3d">Topic: Two Sum</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#be04f887-0891-4012-b8f6-e5ac5f8c30fa">Recall</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#29254a47-135f-4a55-a2ea-d7551c52d964">Notes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#37cd8472-68b0-4d22-a5ee-29c4de11cae2">Date: <time>@July 31, 2022</time> </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#27b4ec3b-a0d6-48d4-aa73-951d85a86991">Topic: Fast Inverse Square Root</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a32a8a3e-0891-41c5-8298-a3616cead958">Recall</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3d000e5b-e0cd-4f39-9b8b-839f386683f7">计算机中浮点数的储存</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2b6b3220-8f09-47a4-844a-bc6e4516865b">Exponent and <em>mantissa 表示浮点数</em></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5fb89532-9d81-4008-9dea-acb356d1a428">这串二进制的真正十进制含义</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3bf73ded-9cd4-4504-91e2-72426215cadd">log取近似值</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#93101538-490b-43cd-a149-2a427afb224a"><mark class="highlight-red">HOLYSHIT！</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e7bf40f9-104d-466e-9317-f511a155ab07">最后使用牛顿法</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f0386cd8-2384-481c-bede-a43ca3cb9e19">Notes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e203f1e8-80be-4f40-938d-9d77f079d005">Date: <time>@July 31, 2022</time> </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#75d2e0fe-b5d9-434f-b002-b4d734b9334f">Topic: <a href="https://zh.wikipedia.org/wiki/%E7%89%9B%E9%A1%BF%E6%B3%95">Newton-Raphson method 牛顿法 </a></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#65526504-ddaa-4c37-af05-835d3f39f3b8">Recall</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6f09622d-c757-45db-a1d7-9bddf3c6524a">Notes</a></div></nav><h1 id="1e805746-dcfb-4b45-ac97-137da6f4f3ca" class=""></h1><p id="236722c7-1e33-4f25-856d-96f2b883f66c" class="">
+</p><h3 id="8e5af7e8-9038-47b9-bf37-5207b2212269" class="">Date: <time>@August 23, 2022</time> </h3><h3 id="a9cd57fc-a509-4c0b-a553-b00ca14d7e3d" class="">Topic: Two Sum</h3><div id="39abd498-d58a-4879-977e-d517ad1889cc" class="column-list"><div id="bd192ee6-63a9-474a-bbda-28c500d9fea3" style="width:25%" class="column"><h3 id="be04f887-0891-4012-b8f6-e5ac5f8c30fa" class="">Recall</h3></div><div id="4e1a5db4-232a-4ad5-889a-80e0986474a4" style="width:75%" class="column"><h3 id="29254a47-135f-4a55-a2ea-d7551c52d964" class="">Notes</h3><ul id="7566b3c7-ad13-4161-930d-780005000804" class="bulleted-list"><li style="list-style-type:disc">...</li></ul><ul id="256429ea-3c17-4c56-8688-6b998b676061" class="bulleted-list"><li style="list-style-type:disc">...</li></ul></div></div><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="50b6cf93-6f24-4ea8-849e-58e4e1bb1164"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>SUMMARY:</strong></div></figure><p id="0bb13467-cb47-4beb-b9b8-e2a707d6f93a" class="">
+</p><hr id="ed504b6a-186b-4420-8547-2b65f85eac08"/><p id="c74b26af-b8e7-4d82-932a-8700fae5ac0f" class="">
+</p><h1 id="37cd8472-68b0-4d22-a5ee-29c4de11cae2" class="">Date: <time>@July 31, 2022</time> </h1><h3 id="27b4ec3b-a0d6-48d4-aa73-951d85a86991" class="">Topic: Fast Inverse Square Root</h3><pre id="44772599-351b-45e6-b1b6-bc6b99d01f07" class="code code-wrap"><code>float Q_rsqrt( float number )
+{
+	long i;
+	float x2, y;
+	const float threehalfs = 1.5F;
+
+	x2 = number * 0.5F;
+	y  = number;
+	i  = * ( long * ) &amp;y;                       // evil floating point bit level hacking
+	i  = 0x5f3759df - ( i &gt;&gt; 1 );               // what the fuck?
+	y  = * ( float * ) &amp;i;
+	y  = y * ( threehalfs - ( x2 * y * y ) );   // 1st iteration 
+//      y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed
+
+	return y;
+}</code></pre><div id="50f20769-f0d8-4bf3-961a-1249bf377395" class="column-list"><div id="7c4166c3-15ed-4d9b-935c-547c60ca9fcc" style="width:25%" class="column"><h3 id="a32a8a3e-0891-41c5-8298-a3616cead958" class="">Recall</h3><h2 id="3d000e5b-e0cd-4f39-9b8b-839f386683f7" class="">计算机中浮点数的储存</h2><p id="7ea9850d-791b-4952-ad52-bbd816e4dc3f" class="">
+</p><p id="bfb7811b-79d4-4eb6-9a2c-0a2bb8f0d89b" class="">
+</p><p id="8a0ef886-0594-4184-9ae9-c9e61b9e63ce" class="">
+</p><h3 id="2b6b3220-8f09-47a4-844a-bc6e4516865b" class="">Exponent and <em>mantissa 表示浮点数</em></h3><p id="9908eb38-ce81-4e8d-91e9-f956a8f7c142" class="">
+</p><p id="b3b4718d-6119-458b-8ea2-9765c295351e" class="">
+</p><p id="dd015a77-55b1-4e01-90ce-f32350db0486" class="">
+</p><p id="4e0b8346-ef9b-4f4b-be91-ab6c169583f6" class="">
+</p><p id="0ba3d4a9-79a3-4e5f-9224-d05019280443" class="">
+</p><h3 id="5fb89532-9d81-4008-9dea-acb356d1a428" class="">这串二进制的真正十进制含义</h3><p id="eceace9f-a781-44c2-bfb0-041b758b2337" class="">
+</p><p id="710aecdd-1ef0-4bdc-bfba-165ec19ee6ae" class="">
+</p><p id="4f8a8115-946c-408d-81e0-d6b267fc3b01" class="">
+</p><p id="32138c2b-c590-407b-b60b-d1ac59d37ca6" class="">
+</p><p id="b81cfbc2-d9bf-4a12-81fc-3fe929b93a4d" class="">
+</p><p id="a64a184a-68b8-419d-98ab-8bdc07e1e733" class="">
+</p><p id="e08d6ddd-a352-44c7-80ae-2d337671515b" class="">
+</p><p id="65787d61-92db-4b88-a044-c0024ae88d9a" class="">
+</p><h2 id="3bf73ded-9cd4-4504-91e2-72426215cadd" class="">log取近似值</h2><figure id="5520eed9-bef1-4860-9d99-a4ddb35c18f6" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo stretchy="false">)</mo><mo>≈</mo><mi>x</mi><mo>+</mo><mi>μ</mi></mrow><annotation encoding="application/x-tex">log_2(1+x)\approx x+\mu </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">μ</span></span></span></span></span></div></figure><p id="55fb9a49-1b53-46cf-90fa-e60bb671035e" class="">
+</p><p id="f55b57a3-e8d0-4f2c-8904-383267b164d7" class="">
+</p><p id="9f75a8d2-7363-47dc-ab56-02946660e2d4" class="">
+</p><p id="1ec4beb6-cc6e-47af-aa4e-0ec050823165" class="">
+</p><p id="ed65265d-1bc6-4007-85d8-0e044e46910f" class="">取log之后不会产生太多的误差</p><p id="7d75b973-a06d-4979-96f7-95bfc286e641" class="">
+</p><p id="97510038-51f7-43ad-951f-004ac40570f7" class="">
+</p><p id="9ddf8b9d-c860-4013-93f8-27963fdaa5b8" class="">
+</p><p id="fb0691f5-8adc-4821-969d-afa7ad5de3a3" class="">所以原式简化成这样：</p><p id="2660c306-fec2-4a2b-8091-a03784a80de1" class="">
+</p><h3 id="93101538-490b-43cd-a149-2a427afb224a" class=""><mark class="highlight-red">HOLYSHIT！</mark></h3><p id="7ff373bb-e362-4cc6-ae3e-7fb2bcd5e773" class="">一个浮点数在计算机中储存的格式的01字符串</p><p id="dea9bb5a-eb36-490b-9d65-f3a9dc9dc018" class="">等于</p><p id="4d3d5319-cb7d-4a86-bf99-071ffa25c275" class="">这个字符串代表的真正十进制数取log()</p><p id="0053780f-6048-4d41-b59c-2383b723c8ff" class=""><mark class="highlight-red">横线之上的已经取过log了！！！</mark></p><p id="d5396aa1-d9f1-4a5f-beb4-9f38c5140a72" class="">
+</p><p id="4bd0fba8-7fa3-4da2-b49e-b90241fe3191" class="">
+</p><p id="58c6b1e8-5968-4db4-bde6-0259a02f02fb" class="">
+</p><p id="5e635ed5-f9af-4cfa-93a0-f9c43f0567dc" class="">
+</p><p id="193f81ba-081c-4290-93db-2b5fda92c389" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span></span><span>﻿</span></span> 已知</p><p id="a767c166-e21b-402f-8ffe-10e1f7f9c0e6" class="">我们要求的是：</p><figure id="1f347885-a326-48d4-b3db-f0ffb03294b3" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mn>1</mn><msqrt><mi>y</mi></msqrt></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{\sqrt y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.34438em;vertical-align:-1.02294em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.70306em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;padding-left:0.833em;">y</span></span><span style="top:-2.66306em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.33693999999999996em;"><span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.02294em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></div></figure><p id="f67bd927-1ca1-4072-8c5d-94a7606460e5" class="">加上log，根据化简：</p><figure id="44100062-2208-4d79-b9ba-b5228f5584be" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mfrac><mn>1</mn><msqrt><mi>y</mi></msqrt></mfrac><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log(\frac{1}{\sqrt y}) = -\frac{1}{2}log(y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.34438em;vertical-align:-1.02294em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.70306em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;padding-left:0.833em;">y</span></span><span style="top:-2.66306em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.33693999999999996em;"><span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.02294em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></span></div></figure><p id="9f838d21-356a-4d38-a0e2-e527d12de631" class="">
+</p><p id="17e33786-ffb7-4f80-ac3c-9dd30f1b7442" class="">再根据前面的论证</p><p id="d529f7f8-7569-4199-b0b5-9c0f6d0f997c" class="">只需求<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\frac{1}{2}log(y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></p><p id="a23c4386-5c12-464e-983a-58e3b3f141a0" class="">
+</p><p id="c5c27ace-b20d-434d-b820-207d1ab4e07f" class="">
+</p><p id="bf0b5fd6-cf42-4fc2-8366-459223bd48fa" class="">
+</p><p id="dd59b327-96d3-4537-9ae6-5a2fa6910a5a" class="">
+</p><p id="9b2f7038-f9aa-492e-91e2-25cf4a2cb319" class="">
+</p><p id="194f34c8-c6bb-4379-8d38-374e77829cac" class="">神奇的数字就出现了</p><h2 id="e7bf40f9-104d-466e-9317-f511a155ab07" class="">最后使用牛顿法</h2><p id="ea349944-ca6d-4feb-aa6d-a576a7aa5000" class=""><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa.html">Topic: Newton-Raphson method 牛顿法 </a> </p><p id="931ec8eb-4ae1-493e-b13d-073ff5e6350b" class="">
+</p><p id="5816340c-13f6-422c-9a98-a4132ed1a930" class="">
+</p><p id="994bc574-04c8-4c8a-8e85-08a46da283a1" class="">
+</p><p id="883050bd-66be-479c-b8ed-b155b8a77706" class="">
+</p><p id="229e4f5a-30b8-4656-b5cf-5c46cfa1ef77" class="">
+</p><p id="287de30e-e10d-4f7a-b9cd-0819b0e0e6d9" class="">在进行了如上的整数操作之后，示例程序再度将被转为长整型的浮点数回转为浮点数</p><p id="69a95763-2b88-49b7-82db-a1ffff2712b4" class="">
+</p><p id="116afc6f-02ef-414e-b917-1053c62f4b1a" class="">并对其进行一次浮点运算操作</p><p id="e1695965-73e6-4727-a94b-e790e18b51e0" class="">
+</p><p id="621a7503-9d4f-4768-bb8c-2ec9797541b8" class="">
+</p><p id="b810751f-54ff-4a99-8374-916e2e263ae6" class="">这里的浮点运算操作就是对其进行一次牛顿法迭代，若以此例说明：</p><p id="2eee40fb-2464-4b7f-9628-f6725dcdf889" class="">
+</p><p id="42c8791a-f7c6-437a-9b62-e04cd7118507" class="">
+</p><p id="66222c47-d749-4aff-8e46-b68ed22f9364" class="">
+</p><p id="a387364d-8ce6-4c8a-ace8-c22cd275b5b8" class="">也就得出了</p></div><div id="2f83e8eb-d518-4c5e-9085-af6ee1884e02" style="width:75%" class="column"><h3 id="f0386cd8-2384-481c-bede-a43ca3cb9e19" class="">Notes</h3><figure id="b8101218-54a1-43fb-b243-36810123153a" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled.png"><img style="width:1234px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled.png"/></a></figure><p id="b7a24393-e306-4c60-9ba3-425b2cfb423d" class="">
+</p><p id="18cdae66-50ea-4ab6-9c24-28877cf8a993" class="">
+</p><p id="67f19ef7-d11b-4227-8f0d-37f48a50e73a" class="">
+</p><figure id="d9075a69-60f7-4566-b850-25ff822d52e0" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%201.png"><img style="width:2306px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%201.png"/></a></figure><p id="fe99503f-60aa-413b-b264-ec26f106e8c2" class="">
+</p><figure id="80a74e04-6c44-4ff2-96a8-2bc357bfe198" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%202.png"><img style="width:2178px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%202.png"/></a></figure><p id="13cb8169-0463-4715-b734-5869ee3bcb22" class="">
+</p><p id="c4f641c9-02d1-4d2e-86aa-997ab45ab563" class="">
+</p><figure id="da365b28-79d8-4573-86cc-832cb687c694" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%203.png"><img style="width:288px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%203.png"/></a></figure><p id="4dcdbdf3-0203-4020-9419-a4840a9441a7" class="">
+</p><figure id="4a392247-71d4-4f69-b2de-5d02f819ffd2" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%204.png"><img style="width:1698px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%204.png"/></a></figure><p id="b3d45a2b-2b4b-4b3a-a8a5-a0bb1de73e38" class="">
+</p><p id="430059f7-3b33-4645-9f59-ab073f1b48b6" class="">
+</p><figure id="d34562cc-78ab-49e3-b1cb-de63514ebb84" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%205.png"><img style="width:2716px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%205.png"/></a></figure><p id="4cf7a84c-01a4-4225-ad8f-6b12d2ac8639" class="">
+</p><p id="d441fe44-2e2d-46da-bc79-9e3541e3d088" class="">
+</p><p id="81b1f9ca-3e06-475e-9976-7273431fd1a5" class="">
+</p><p id="280b3a45-c673-479c-b4e0-5d8f1234e440" class="">
+</p><p id="f2e7535a-8f13-4706-a0d0-73c7b943829e" class="">
+</p><figure id="1a632f78-2592-47c4-8191-eba37c2aa3f9" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%206.png"><img style="width:1704px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%206.png"/></a></figure><p id="eb875ca7-7d64-446c-8bde-28de8c419b0b" class="">
+</p><p id="dca195a2-b5b7-4cd4-a964-9c38c2b97db7" class="">
+</p><p id="e235b3bd-13fd-4013-aa78-d547955f9204" class="">
+</p><p id="78fb4b64-d461-4ba1-9103-6aeb134d621b" class="">
+</p><p id="6f862eb0-a71f-4fed-ad4e-6795e35bc872" class="">
+</p><figure id="9b737646-7906-4815-967d-b3d475cdc5e2" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%207.png"><img style="width:2112px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%207.png"/></a></figure><p id="bb8a723c-8760-46a1-b60a-95b30231275c" class="">化简：</p><figure id="51b7304b-1533-4490-839e-eb593ae9a131" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%208.png"><img style="width:1640px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%208.png"/></a></figure><p id="2b7c57f2-b965-4825-a0ae-5983bc2fbc02" class="">
+</p><figure id="0274e6be-9823-486a-b78e-8e1c24ea4d49" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%209.png"><img style="width:2194px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%209.png"/></a></figure><p id="2483601c-26ce-4d06-a46c-9fd649d2a6c3" class="">
+</p><pre id="a90e293e-5cdd-4d17-814c-851a35d2768c" class="code code-wrap"><code>x = *(float*)&amp;i;）</code></pre><p id="dd4930d5-5870-4e7d-986c-e29155823645" class="">
+</p><pre id="47cfffad-812e-49e5-a5d6-7433d5e30a72" class="code code-wrap"><code>x = x*(1.5f - xhalf*x*x);</code></pre><p id="0121ac18-c4e1-4e63-b26a-2f0fbd8d20b1" class="">
+</p><figure id="4df46375-6f64-4adf-91b8-207ed22f588d" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2010.png"><img style="width:1536px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2010.png"/></a></figure><p id="02f68b25-45ab-440e-b073-4d2264db801f" class="">
+</p><pre id="faacecbe-f9df-4e0c-9cd8-eeb4fe1ce4f8" class="code code-wrap"><code>y = y*(threehalfs - xhalf*y*y);</code></pre></div></div><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="f0cdb0e8-69f0-4867-b2b3-33e7b3b01cdc"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>SUMMARY:</strong></div></figure><p id="628b4fca-9fbf-48dd-8435-8b188c10efde" class="">
+</p><hr id="703bb256-c588-4b7b-a68c-f9df07960282"/><p id="e4cfed1e-c183-49e9-95f4-8248e0777a05" class="">
+</p><h1 id="e203f1e8-80be-4f40-938d-9d77f079d005" class="">Date: <time>@July 31, 2022</time> </h1><h3 id="75d2e0fe-b5d9-434f-b002-b4d734b9334f" class="">Topic: <a href="https://zh.wikipedia.org/wiki/%E7%89%9B%E9%A1%BF%E6%B3%95">Newton-Raphson method 牛顿法 </a></h3><div id="8bb4b170-fb0b-430b-9a63-1511db948608" class="column-list"><div id="6ff1c26f-5195-42a8-a8eb-a59f3e5f78ad" style="width:37.5%" class="column"><h3 id="65526504-ddaa-4c37-af05-835d3f39f3b8" class="">Recall</h3><p id="e5d83147-f522-4e4d-8cec-03ef20b2b202" class="">是一种在实数域和复数域上近似求解方程的方法。方法使用函数<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mstyle></mrow><annotation encoding="application/x-tex">{\displaystyle f(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></span><span>﻿</span></span>的<a href="https://zh.wikipedia.org/wiki/%E6%B3%B0%E5%8B%92%E7%BA%A7%E6%95%B0">泰勒级数</a>的前面几项来寻找方程<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mstyle></mrow><annotation encoding="application/x-tex">{\displaystyle f(x)=0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span></span></span></span><span>﻿</span></span>
+的根</p><p id="3a0d59b3-04b8-4bba-ac19-37b5222c2106" class="">
+</p><p id="b445cd3b-d472-4f2a-a70e-dec5b60129ba" class="">
+</p><p id="5c97b250-125b-4617-8bfe-b0b76915d712" class="">
+</p><p id="0a72a801-f033-466c-811f-187c75f69514" class="">
+</p><p id="84910a96-3540-4364-a71c-d75fbbbdbf2a" class="">
+</p><p id="51d42979-eb19-4882-a5ae-0b84b0626212" class="">
+</p><p id="35a8b0e9-2e15-4532-893d-70a31d6e6e21" class="">
+</p><p id="90725631-5f6f-4493-b1d4-b751f7a9a489" class="">
+</p><p id="dcfae035-84a9-420b-ae7f-f1197bd57381" class="">
+</p><p id="c5979948-e8df-42ab-8658-461e209796b6" class="">
+</p><p id="81d954a8-4682-4ad7-a2fe-8dee8334aefb" class="">
+</p><p id="1b551cea-a426-4c40-b41a-7160c0888220" class="">
+</p><p id="d21dc958-1454-42fb-a71f-ca843384c546" class="">
+</p><p id="880883fa-4701-44e8-bfb8-df1fff9ffac5" class="">
+</p><p id="471d3c9f-f93a-4d83-9d40-ac676896fdab" class="">
+</p><p id="606b4948-4a5b-4518-9ae3-b26da3068919" class="">
+</p><p id="e6d54f9e-d7ad-4b58-9fd3-234b4de16254" class="">
+</p><p id="0d33123b-048c-42cd-988a-5c9c523753f0" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mroot><mi>a</mi><mi>m</mi></mroot></mrow><annotation encoding="application/x-tex">x=\sqrt[m]{a}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.23972em;"></span><span class="mord sqrt"><span class="root"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5516160000000001em;"><span style="top:-2.836336em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size6 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span></span></span></span></span></span></span></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8002800000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal">a</span></span></span><span style="top:-2.76028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23972em;"><span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></p></div><div id="564db3f7-f0dc-43c5-a403-3e9c8f5ef706" style="width:62.5%" class="column"><h3 id="6f09622d-c757-45db-a1d7-9bddf3c6524a" class="">Notes</h3><figure id="a9823e1d-8330-4e02-b22d-2905bb5f1ccb" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2011.png"><img style="width:1372px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2011.png"/></a></figure><figure id="4551f2b0-2f55-4922-ab27-33735c61e01e" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/NewtonIteration_Ani.gif"><img style="width:673px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/NewtonIteration_Ani.gif"/></a></figure><figure id="e6fd75ba-681f-42c3-96dd-74e567b2c0c2" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2012.png"><img style="width:590px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2012.png"/></a></figure><figure id="d4031ce5-5302-4f6f-958e-86204e4d7a26" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2013.png"><img style="width:450px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2013.png"/></a></figure><figure id="ab6df5a9-bbf5-4e30-8dd9-797c26146d32" class="image"><a href="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2014.png"><img style="width:2736px" src="Algorithms%201703aec4e0434bdeb2e7ca5c4489a3aa/Untitled%2014.png"/></a></figure></div></div><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="cd8e07b9-2978-4830-b9a9-5a3e30812cde"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>SUMMARY:</strong></div></figure><hr id="5eb65e9d-3dcd-4a03-81a0-6bf191dd2d9c"/></div></article></body></html>
