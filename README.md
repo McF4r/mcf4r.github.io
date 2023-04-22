@@ -1,7 +1,5 @@
-# mcf4r.github.io
-## [前往](https://mcf4r.github.io)
-一个记录所学知识的网站
-### 搭建wiki
-服务器使用[Github Pages](https://pages.github.com/)\
-使用Jekyll作为服务器框架[![Gem Version](https://img.shields.io/gem/v/jekyll.svg)]\
-html由[Notion](https://www.notion.so/)生成
+# [ye-junzhe.github.io](https://ye-junzhe.github.io/)
+### A website hosting my notes
+
+Hosted with [Github Pages](https://pages.github.com/)\
+Powered by [Jekyll](https://jekyllrb.com/)
