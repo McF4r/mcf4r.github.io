@@ -283,6 +283,10 @@ ol > li {
 	margin-right: 1em;
 }
 
+.page-description {
+    margin-bottom: 2em;
+}
+
 .simple-table {
 	margin-top: 1em;
 	font-size: 0.875rem;
@@ -637,6 +641,7 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
@@ -647,6 +652,8 @@ blockquote {
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,7 +673,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="25f243b9-719f-41bb-bf6f-13e072b0cef6" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Ray%20Tracing%2025f243b9719f41bbbf6f13e072b0cef6/raytracing.webp"/></div><h1 class="page-title">Ray Tracing</h1></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bdb125a4-698f-4715-bb45-6ae45395a31c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The learning of Ray Tracing</div></figure><nav id="c92e3c5d-8a67-49c5-99b5-db9cd2bd8b70" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b0ada324-8662-4816-a1ae-0b9aee487c16">Topic: Ray Tracing series</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2a6bbdfc-b8f9-4b7c-b9ea-19e1f45612cb">Date: <time>@August 18, 2022</time> </a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#bbc0b92e-62b2-498a-9d1f-0d40da20d2fa">Recall</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#18c7be49-2057-4491-9f97-884de0b2242a">Notes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7447c743-43c7-48ef-a10f-a0690d6d6668">Unity Ray Tracing教程</a></div></nav><div id="549bd55e-a641-4bb8-9c2d-5d2cebbe3c48" class="column-list"><div id="8300e91d-922b-4501-825d-3af1c27eb30e" style="width:50%" class="column"><p id="e90a077b-0a68-451d-af15-8b6a887e0ceb" class="">
+</style></head><body><article id="25f243b9-719f-41bb-bf6f-13e072b0cef6" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Ray%20Tracing%2025f243b9719f41bbbf6f13e072b0cef6/raytracing.webp"/></div><h1 class="page-title">Ray Tracing</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bdb125a4-698f-4715-bb45-6ae45395a31c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The learning of Ray Tracing</div></figure><nav id="c92e3c5d-8a67-49c5-99b5-db9cd2bd8b70" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b0ada324-8662-4816-a1ae-0b9aee487c16">Topic: Ray Tracing series</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2a6bbdfc-b8f9-4b7c-b9ea-19e1f45612cb">Date: <time>@August 18, 2022</time> </a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#bbc0b92e-62b2-498a-9d1f-0d40da20d2fa">Recall</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#18c7be49-2057-4491-9f97-884de0b2242a">Notes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7447c743-43c7-48ef-a10f-a0690d6d6668">Unity Ray Tracing教程</a></div></nav><div id="549bd55e-a641-4bb8-9c2d-5d2cebbe3c48" class="column-list"><div id="8300e91d-922b-4501-825d-3af1c27eb30e" style="width:50%" class="column"><p id="e90a077b-0a68-451d-af15-8b6a887e0ceb" class="">
 </p></div><div id="e93c3fb3-c2ab-476a-873b-688888532999" style="width:50%" class="column"><p id="bad92484-5dd7-4c22-9d13-ed7f4868522a" class="">
 </p></div></div><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="6e217b5d-db31-4f65-8b82-dcc885a8893f"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>SUMMARY:</strong></div></figure><p id="b3b18726-664a-4f7b-9400-2ad9ceba66d8" class="">
 </p><hr id="47b44a39-0bb3-4fd0-b160-5bb384d75ea3"/><p id="9ac3c19e-f062-47e7-88fa-eb77dd4e2929" class="">

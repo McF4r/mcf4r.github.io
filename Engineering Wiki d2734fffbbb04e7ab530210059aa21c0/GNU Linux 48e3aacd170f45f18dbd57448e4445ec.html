@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Leetcode</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>GNU/Linux</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -281,6 +281,10 @@ ol > li {
 .collection-title {
 	display: inline-block;
 	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
 }
 
 .simple-table {
@@ -637,6 +641,7 @@ blockquote {
 .block-color-red_background {
 	background: rgba(253, 235, 236, 1);
 }
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
 .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
 .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
 .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
@@ -647,6 +652,8 @@ blockquote {
 .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
 .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
 .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
 
 .checkbox {
 	display: inline-flex;
@@ -666,29 +673,4 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style></head><body><article id="4544cd97-2b9e-42f4-8565-ee18665a2b16" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="Leetcode%204544cd972b9e42f48565ee18665a2b16/LeetCode_logo_black.png"/></div><h1 class="page-title">Leetcode</h1></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2770f648-214b-4f86-8aec-85d1702eeb0d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Leetcode！</div></figure><figure id="704e457d-bc8f-4324-b5cb-021752a98dc0"><a href="https://leetcode.com/problemset/all/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://leetcode.com/problemset/all/</div></div></a></figure><nav id="ac1b78f2-0897-4441-899a-19b0e4050c02" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#be6675c0-66ea-4e7d-a3e9-aea66ad131b1"><strong>3. Longest Substring Without Repeating Characters</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#044a4ce2-c5d5-4bfa-990d-daaebe362ac3"><strong><strong>Sliding Window Optimized</strong></strong></a></div></nav><h1 id="be6675c0-66ea-4e7d-a3e9-aea66ad131b1" class=""><strong>3. Longest Substring Without Repeating Characters</strong></h1><h2 id="044a4ce2-c5d5-4bfa-990d-daaebe362ac3" class=""><strong><strong>Sliding Window Optimized</strong></strong></h2><pre id="8070dec7-0b2a-4bde-ba93-f49016da82e4" class="code code-wrap"><code>class Solution {
-public:
-    int lengthOfLongestSubstring(string s) {
-
-        int n = int(s.length()), res = 0; // n为s的长度，res=0
-        unordered_map&lt;char, int&gt; mp; // 哈希表mp&lt;char, int&gt;
-
-        for (int j = 0, i = 0; j &lt; n; j++) // 遍历整个s
-        {
-        
-            if(mp[s[j]] &gt; 0)  // 如果mp中存在s[j]，即重复了
-            {
-                i = max(mp[s[j]], i); // 更新i的位置，直接跳到重复位置的下一个元素，因为mp中存的不包括0，所以直接就跳到重复位置的下一个元素了
-            }
-            
-            res = max(res, j - i + 1); // 更新最大字符串长度
-            mp[s[j]] = j + 1; // 给mp插入键值对，第一个被插入的（以图为例），a：1，也会更新mp中键的值
-        
-        }
-
-        return res;
-    }
-};</code></pre><figure id="55ca1982-4921-4c3f-9383-4545e24a60f5" class="image"><a href="Leetcode%204544cd972b9e42f48565ee18665a2b16/Untitled.png"><img style="width:1596px" src="Leetcode%204544cd972b9e42f48565ee18665a2b16/Untitled.png"/></a></figure><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="2f2f2e02-4c7c-411d-984a-7a96ea9f9e37"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><strong>SUMMARY:</strong></div></figure><p id="041b2268-5394-43ad-a5f7-e3973991d693" class="">
-</p><hr id="ad0fbb0c-a814-4ddd-b4b8-a82e6a8cc67f"/><p id="47674614-2f86-47ad-a6bb-aaaf4c5f3ba0" class="">
-</p><p id="44f48298-6075-4af9-ac72-5b23fc8b17f6" class="">
-</p></div></article></body></html>
+</style></head><body><article id="48e3aacd-170f-45f1-8dbd-57448e4445ec" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="GNU%20Linux%2048e3aacd170f45f18dbd57448e4445ec/gnulogo.png"/></div><h1 class="page-title">GNU/Linux</h1><p class="page-description"></p></header><div class="page-body"><nav id="f46278d1-9464-4768-9dca-6c980df5b327" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fe4d9852-bd51-4a22-bda3-4c263f204c73">GNU</a></div></nav><h1 id="fe4d9852-bd51-4a22-bda3-4c263f204c73" class="">GNU</h1><p id="2e1c2235-8729-4f35-8b8b-ff0615e931f8" class=""><a href="https://www.gnu.org/gnu/initial-announcement.html#:~:text=%E5%A6%82%E6%9E%9C%E6%9C%89%E4%BA%86%E9%87%91%E9%92%B1%E4%B8%8A%E7%9A%84%E6%8D%90%E5%8A%A9%EF%BC%8C%E6%88%91%E5%8F%AF%E8%83%BD%E4%BC%9A%E9%9B%87%E4%BD%A3%E4%B8%80%E4%BA%9B%E5%85%A8%E8%81%8C%E6%88%96%E5%85%BC%E8%81%8C%E7%9A%84%E4%BA%BA%E3%80%82%E8%96%AA%E6%B0%B4%E4%B8%8D%E9%AB%98%EF%BC%8C%E4%BD%86%E6%98%AF%E6%88%91%E8%A6%81%E6%89%BE%E7%9A%84%E4%BA%BA%E8%A6%81%E6%98%8E%E7%99%BD%E4%BB%96%E4%BB%AC%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%98%AF%E5%9C%A8%E5%B8%AE%E5%8A%A9%E4%BA%BA%E7%B1%BB%EF%BC%8C%E8%BF%99%E5%92%8C%E9%87%91%E9%92%B1%E4%B8%80%E6%A0%B7%E9%87%8D%E8%A6%81%E3%80%82%E6%88%91%E8%AE%A4%E4%B8%BA%E8%BF%99%E6%98%AF%E5%9C%A8%E4%B8%BA%E9%82%A3%E4%BA%9B%E6%84%BF%E6%84%8F%E5%85%A8%E8%BA%AB%E5%BF%83%E6%8A%95%E5%85%A5%E5%88%B0GNU%E5%B7%A5%E4%BD%9C%E4%B8%AD%E7%9A%84%E4%BA%BA%E4%BB%AC%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E4%B8%8D%E7%94%A8%E5%86%8D%E5%AF%BB%E6%89%BE%E5%85%B6%E4%BB%96%E8%B0%8B%E7%94%9F%E6%89%8B%E6%AE%B5%E7%9A%84%E6%9C%BA%E4%BC%9A%E3%80%82">https://www.gnu.org/gnu/initial-announcement.html#:~:text=如果有了金钱上的捐助，我可能会雇佣一些全职或兼职的人。薪水不高，但是我要找的人要明白他们的工作是在帮助人类，这和金钱一样重要。我认为这是在为那些愿意全身心投入到GNU工作中的人们提供一个不用再寻找其他谋生手段的机会。</a></p><p id="96577ab7-57bc-43d5-b74f-fca6a98d96db" class=""><a href="https://www.gnu.org/gnu/rms-lisp.html#:~:text=%E8%BF%99%E4%B8%AA%E7%AC%AC%E4%BA%8C%E7%89%88%E7%9A%84%20Emacs%20%E6%98%AF%E7%8E%B0%E4%BB%A3%E6%84%8F%E4%B9%89%E4%B8%8A%E7%9A%84%E2%80%98%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6%E2%80%99%E2%80%94%E2%80%94%E5%AE%83%E6%98%AF%E5%8A%9B%E4%BA%89%E8%BD%AF%E4%BB%B6%E8%87%AA%E7%94%B1%E7%9A%84%E6%94%BF%E6%B2%BB%E8%BF%90%E5%8A%A8%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86%E3%80%82%E8%AF%A5%E8%BF%90%E5%8A%A8%E7%9A%84%E7%B2%BE%E9%AB%93%E5%B0%B1%E6%98%AF%E6%AF%8F%E4%B8%AA%E4%BA%BA%E9%83%BD%E5%BA%94%E8%AF%A5%E6%9C%89%E8%87%AA%E7%94%B1%E5%81%9A%E6%88%91%E4%BB%AC%E5%9C%A8%20MIT%20%E7%9A%84%E9%82%A3%E6%AE%B5%E5%B2%81%E6%9C%88%E5%81%9A%E7%9A%84%E4%BA%8B%EF%BC%8C%E4%B8%80%E8%B5%B7%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%EF%BC%8C%E5%8F%AA%E8%A6%81%E6%84%BF%E6%84%8F%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%B8%80%E8%B5%B7%E5%B7%A5%E4%BD%9C%E3%80%82%E8%BF%99%E5%B0%B1%E6%98%AF%E8%87%AA%E7%94%B1%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94%E4%B9%9F%E6%98%AF%E6%88%91%E7%9A%84%E7%BB%8F%E5%8E%86%EF%BC%8C%E6%98%AF%E6%88%91%E5%9C%A8%20MIT%20%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AE%9E%E9%AA%8C%E5%AE%A4%E7%9A%84%E7%94%9F%E6%B4%BB%E2%80%94%E2%80%94%E4%B8%BA%E4%BA%BA%E7%B1%BB%E7%9A%84%E7%9F%A5%E8%AF%86%E8%80%8C%E5%B7%A5%E4%BD%9C%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E9%98%BB%E7%A2%8D%E5%85%B6%E4%BB%96%E4%BA%BA%E4%BD%BF%E7%94%A8%E5%92%8C%E4%BC%A0%E6%92%AD%E4%BA%BA%E7%B1%BB%E7%9A%84%E7%9F%A5%E8%AF%86%E3%80%82">https://www.gnu.org/gnu/rms-lisp.html#:~:text=这个第二版的 Emacs 是现代意义上的‘自由软件’——它是力争软件自由的政治运动的一部分。该运动的精髓就是每个人都应该有自由做我们在 MIT 的那段岁月做的事，一起开发软件，只要愿意就可以一起工作。这就是自由软件的基础——也是我的经历，是我在 MIT 人工智能实验室的生活——为人类的知识而工作，而不是阻碍其他人使用和传播人类的知识。</a></p></div></article></body></html>
